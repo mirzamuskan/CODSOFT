@@ -1,1 +1,57 @@
+package fundamentals;
+import java.lang.Math;//To generate random number.
+import java.util.Scanner;//To take input from user.
+
+public class GuessRandomNumber {
+	public static void GuessRandomnumber(int k) {
+		int answer = (int)(Math.random() * 100) + 1;//It will Generate Random numbers from 1 to 100;
+		Scanner s=new Scanner(System.in);
+		System.out.println(answer);
+		System.out.println("Guess any number from 1 to 100");
+		
+		boolean win=false;
+		while(k>0) {
+			System.out.println("You have "+ (k) +" chances to guess the number");
+			int guess=s.nextInt();
+			if(guess==answer) {
+				System.out.println("Congratulations!! You win\nYour Score is:" + k*20);
+				
+				win=true;
+				break;
+			}else if(guess>answer) {
+				System.out.println("Your guess is to high");
+				
+				
+				k--;
+			}else if(guess<answer) {
+				System.out.println("Your guess is to low");
+				
+				
+				k--;
+			}
+			
+		}
+		if(win==false) {
+			System.out.println("You loss \nbetter luck next time!");
+			System.out.println("Do you want to play again: if yes enter 1 ");
+			int Multilple_rounds=s.nextInt();
+			if(Multilple_rounds==1) {
+				k=5;
+				GuessRandomnumber(k);
+			}
+
+		}
+	}
+	public static void main(String[] args) {
+		int k=5;
+		GuessRandomnumber(k);
+	}
+	}
+
+	
+	
+	
+	
+
+
 
