@@ -6,7 +6,6 @@ public class GuessRandomNumber {
 	public static void GuessRandomnumber(int k) {
 		int answer = (int)(Math.random() * 100) + 1;//It will Generate Random numbers from 1 to 100;
 		Scanner s=new Scanner(System.in);
-		System.out.println(answer);
 		System.out.println("Guess any number from 1 to 100");
 		
 		boolean win=false;
