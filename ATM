@@ -1,0 +1,72 @@
+package atm;
+
+import java.util.Scanner;
+
+public class Atm {
+	double balanace;
+
+	public Atm(double amount) {
+		this.balanace=amount;
+	}
+	public double withdraw(double amounttobewithdraw) {
+		
+		this.balanace=this.balanace-amounttobewithdraw;
+		return balanace;
+	}
+	public double deposit(double amounttodeposit) {
+		System.out.println("Insert cash");
+		this.balanace=this.balanace+amounttodeposit;
+		return balanace;
+	}
+	public void checkbalance() {
+		System.out.println("Available balance:"+this.balanace);
+	}
+
+	}
+package atm;
+
+import java.util.Scanner;
+
+public class user {
+	public static void main(String[] args) {
+		Scanner s=new Scanner(System.in);
+		Atm atm=new Atm(1000);//account is created with minimum balance.
+		System.out.println("Welcom to BankOfCodesoft");
+		while(true) {
+			System.out.println("please select any option to proceed further"
+					+"\n1 :Check Account Balance"
+					+"\n2 : Deposit money"
+					+"\n3 : Withdraw money"
+					+"\n4 : Exit");
+					switch(s.nextInt()){
+						case 1 : atm.checkbalance();
+								 break;
+						case 2 : System.out.println("enter amount to be Desposited");
+							     atm.deposit(s.nextDouble());
+							     System.out.println("Please wait while your transaction is being proceed \nTransaction Succesfull!");
+							     break;
+						case 3: 
+								System.out.println("enter amount to be Withdraw");
+								atm.withdraw(s.nextDouble());
+							    System.out.println("Please wait while your transaction is being proceed");
+							    System.out.println("Transaction Succesful!");
+							    System.out.println("Collect Cash");
+							   
+								break;
+						case 4:
+								s.close();
+								System.out.println("Thank You! \nVisit Again");
+								return;
+						default:
+							System.out.println("You enter a wrong Input");
+							
+							
+						
+					}
+		}
+
+}
+}
+
+
+
