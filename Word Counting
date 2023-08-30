@@ -1,0 +1,114 @@
+import java.awt.EventQueue;
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Font;
+import java.awt.Color;
+
+public class Wordcount {
+
+	private JFrame frmWordCounter;
+	private JTextField textmsg;
+	private JButton btnOk;
+	private JButton btnReset;
+	private JLabel labelmsg;
+	private JLabel lblNumberOfWord;
+	private JLabel labelmsg2;
+	private JLabel lblNumberOfRepeated;
+
+	// Track repeated words
+	private int repeatCount = 0;
+
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Wordcount window = new Wordcount();
+					window.frmWordCounter.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	public Wordcount() {
+		initialize();
+	}
+
+	private void initialize() {
+		frmWordCounter = new JFrame();
+		frmWordCounter.setTitle("Word Counter");
+		frmWordCounter.setBounds(100, 100, 686, 567);
+		frmWordCounter.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmWordCounter.getContentPane().setLayout(null);
+
+		textmsg = new JTextField();
+		textmsg.setBounds(211, 98, 378, 60);
+		frmWordCounter.getContentPane().add(textmsg);
+
+		btnOk = new JButton("Count Words");
+		btnOk.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int count = 0;
+				repeatCount = 0; // Reset repeat count
+				String s = textmsg.getText();
+				String[] arr = s.split(" ");
+
+				for (String word : arr) {
+					if (!word.trim().isEmpty()) {
+						count++;
+					}
+				}
+
+				labelmsg.setText(Integer.toString(count));
+
+				// Count repeated words
+				for (int i = 0; i < arr.length - 1; i++) {
+					for (int j = i + 1; j < arr.length; j++) {
+						if (arr[i].equalsIgnoreCase(arr[j])) {
+							repeatCount++;
+						}
+					}
+				}
+
+				labelmsg2.setText(Integer.toString(repeatCount));
+			}
+		});
+		btnOk.setBounds(34, 254, 249, 39);
+		frmWordCounter.getContentPane().add(btnOk);
+
+		labelmsg = new JLabel("");
+		labelmsg.setBounds(311, 349, 312, 45);
+		frmWordCounter.getContentPane().add(labelmsg);
+
+		lblNumberOfWord = new JLabel("  Number of words:");
+		lblNumberOfWord.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNumberOfWord.setBounds(34, 349, 200, 45);
+		frmWordCounter.getContentPane().add(lblNumberOfWord);
+
+		labelmsg2 = new JLabel("");
+		labelmsg2.setBounds(311, 428, 312, 45);
+		frmWordCounter.getContentPane().add(labelmsg2);
+
+		lblNumberOfRepeated = new JLabel("  Number of repeated words:");
+		lblNumberOfRepeated.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNumberOfRepeated.setBounds(21, 428, 280, 45);
+		frmWordCounter.getContentPane().add(lblNumberOfRepeated);
+
+		btnReset = new JButton("Reset");
+		btnReset.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textmsg.setText("");
+				labelmsg.setText("");
+				labelmsg2.setText("");
+				repeatCount = 0;
+			}
+		});
+		btnReset.setBounds(351, 254, 249, 39);
+		frmWordCounter.getContentPane().add(btnReset);
+	}
+}
